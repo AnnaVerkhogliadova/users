@@ -4,16 +4,16 @@ public class UserResponse {
     private final long id;
     private final String firstname;
 
-    public UserResponse(long id, String firstname){
+    public UserResponse(long id, String firstname) {
         this.id = id;
         this.firstname = firstname;
     }
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public String getFirstname(){
+    public String getFirstname() {
         return firstname;
     }
 }
