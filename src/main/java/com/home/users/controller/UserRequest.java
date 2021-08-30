@@ -1,10 +1,10 @@
 package com.home.users.controller;
 
-public class CreateUserRequest {
+public class UserRequest {
     long id;
     String name;
 
-    public CreateUserRequest(long id, String name) {
+    public UserRequest(long id, String name) {
         this.id = id;
         this.name = name;
     }
