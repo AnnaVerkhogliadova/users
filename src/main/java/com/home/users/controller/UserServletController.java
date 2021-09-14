@@ -2,7 +2,7 @@ package com.home.users.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.home.users.model.User;
-import com.home.users.repository.FileUserRepository;
+import com.home.users.repository.JdbcUserRepository;
 import com.home.users.repository.UserRepository;
 import com.home.users.service.UserService;
 
@@ -18,23 +18,23 @@ public class UserServletController extends HttpServlet {
 
     private final UserService userService;
 
-
     public UserServletController() {
-        final UserRepository userRepository = new FileUserRepository();
+        final UserRepository userRepository = new JdbcUserRepository();
         userService = new UserService(userRepository);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        CreateUserRequest cur = OBJECT_MAPPER.readValue(body, CreateUserRequest.class);
+        UserRequest cur = OBJECT_MAPPER.readValue(body, UserRequest.class);
         User user = userService.createUser(cur.getName());
+
+        UserResponse response = new UserResponse(user.getId(), user.getFirstname());
 
         resp.setContentType("application/json; charset=UTF-8;");
         resp.setCharacterEncoding("UTF-8");
-        String jsonString = OBJECT_MAPPER.writeValueAsString(user);
+        String jsonString = OBJECT_MAPPER.writeValueAsString(response);
         resp.setStatus(200);
         resp.getWriter().write(jsonString);
     }
@@ -43,10 +43,12 @@ public class UserServletController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         List<User> users = userService.getAllUsers();
-
+        List<UserResponse> response = users.stream()
+                .map(user -> new UserResponse(user.getId(), user.getFirstname()))
+                .collect(Collectors.toList());
         resp.setContentType("application/json; charset=UTF-8;");
         resp.setCharacterEncoding("UTF-8");
-        String jsonString = OBJECT_MAPPER.writeValueAsString(users);
+        String jsonString = OBJECT_MAPPER.writeValueAsString(response);
         resp.setStatus(200);
         resp.getWriter().write(jsonString);
     }

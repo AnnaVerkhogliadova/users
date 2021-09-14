@@ -2,18 +2,18 @@ package com.home.users.controller;
 
 public class UserResponse {
     private final long id;
-    private final String firstname;
+    private final String name;
 
-    public UserResponse(long id, String firstname) {
+    public UserResponse(long id, String name) {
         this.id = id;
-        this.firstname = firstname;
+        this.name = name;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getName() {
+        return name;
     }
 }

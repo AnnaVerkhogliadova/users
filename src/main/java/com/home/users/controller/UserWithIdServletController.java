@@ -2,7 +2,7 @@ package com.home.users.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.home.users.model.User;
-import com.home.users.repository.FileUserRepository;
+import com.home.users.repository.JdbcUserRepository;
 import com.home.users.repository.UserRepository;
 import com.home.users.service.UserService;
 
@@ -18,7 +18,7 @@ public class UserWithIdServletController extends HttpServlet {
     private final UserService userService;
 
     public UserWithIdServletController() {
-        final UserRepository userRepository = new FileUserRepository();
+        final UserRepository userRepository = new JdbcUserRepository();
         userService = new UserService(userRepository);
     }
 
@@ -31,9 +31,12 @@ public class UserWithIdServletController extends HttpServlet {
         String pathInfo = req.getPathInfo(); // /{value}/test //запрос
         String[] pathParts = pathInfo.split("/");
         String part1 = pathParts[1]; // {value}
+
         long id = Long.parseLong(part1);
         User user = userService.getUser(id);
-        String jsonString = OBJECT_MAPPER.writeValueAsString(user);
+        UserResponse response = new UserResponse(user.getId(), user.getFirstname());
+
+        String jsonString = OBJECT_MAPPER.writeValueAsString(response);
         resp.setStatus(200);
         resp.getWriter().write(jsonString);
 
@@ -47,7 +50,7 @@ public class UserWithIdServletController extends HttpServlet {
         String part1 = pathParts[1];
         long id = Long.parseLong(part1);
         userService.deleteUser(id);
-        resp.setStatus(200);
+        resp.setStatus(204);
     }
 
     @Override
@@ -58,11 +61,14 @@ public class UserWithIdServletController extends HttpServlet {
         String pathInfo = req.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         String part1 = pathParts[1];
+
         long id = Long.parseLong(part1);
         String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        UserResponse ur = OBJECT_MAPPER.readValue(body, UserResponse.class);
-        User user = userService.updateUser(id, ur.getFirstname());
-        String jsonString = OBJECT_MAPPER.writeValueAsString(user);
+
+        UserRequest ur = OBJECT_MAPPER.readValue(body, UserRequest.class);
+        User user = userService.updateUser(id, ur.getName());
+        UserResponse response = new UserResponse(user.getId(), user.getFirstname());
+        String jsonString = OBJECT_MAPPER.writeValueAsString(response);
         resp.setStatus(200);
         resp.getWriter().write(jsonString);
     }

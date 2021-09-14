@@ -3,7 +3,6 @@ package com.home.users.service;
 import com.home.users.model.User;
 import com.home.users.repository.UserRepository;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -28,9 +27,9 @@ public class UserService {
         return userRepository.getAllUsers();
     }
 
-    public User getUser(long getId) throws FileNotFoundException {
+    public User getUser(long getId) throws IOException {
         User user = userRepository.getUser(getId);
-        if(user == null) {
+        if (user == null) {
             throw new RuntimeException("Пользователь не найден");
         }
         return user;
@@ -43,7 +42,7 @@ public class UserService {
     public User updateUser(long updateId, String name) throws IOException {
         //getUser(updateId);
         User user = userRepository.updateUser(updateId, name);
-        if(user == null) {
+        if (user == null) {
             throw new RuntimeException("Пользователь не найден");
         } else {
             System.out.println(user);

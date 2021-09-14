@@ -1,16 +1,13 @@
 package com.home.users.controller;
 
-public class CreateUserRequest {
-    long id;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+public class UserRequest {
     String name;
-
-    public CreateUserRequest(long id, String name) {
-        this.id = id;
+    
+    public void setName(String name) {
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getName() {
