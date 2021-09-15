@@ -40,7 +40,7 @@ public class UserService {
     }
 
     public User updateUser(long updateId, String name) throws IOException {
-        //getUser(updateId);
+        getUser(updateId);
         User user = userRepository.updateUser(updateId, name);
         if (user == null) {
             throw new RuntimeException("Пользователь не найден");
