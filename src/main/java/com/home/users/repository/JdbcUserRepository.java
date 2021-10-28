@@ -1,11 +1,13 @@
 package com.home.users.repository;
 
 import com.home.users.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository //создаст бин классса и внедрит его в контроллер
 public class JdbcUserRepository implements UserRepository {
     private static final String URL = "jdbc:postgresql://localhost:5432/users";
     private static final String USERNAME = "postgres";

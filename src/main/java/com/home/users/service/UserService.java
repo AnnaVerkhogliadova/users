@@ -2,11 +2,13 @@ package com.home.users.service;
 
 import com.home.users.model.User;
 import com.home.users.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+@Service
 public class UserService {
     private static final Random RANDOM = new Random();
     private final UserRepository userRepository;
