@@ -1,4 +1,4 @@
-package com.home.users.controller;
+package com.home.users.requestAndResponse;
 
 
 public class UserRequest {
