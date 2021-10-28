@@ -1,7 +1,7 @@
 package com.home.users.controller;
 
-import com.home.users.requestAndResponse.UserRequest;
-import com.home.users.requestAndResponse.UserResponse;
+import com.home.users.dto.UserRequest;
+import com.home.users.dto.UserResponse;
 import com.home.users.model.User;
 import com.home.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

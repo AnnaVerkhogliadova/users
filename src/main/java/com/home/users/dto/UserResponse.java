@@ -1,4 +1,4 @@
-package com.home.users.requestAndResponse;
+package com.home.users.dto;
 
 public class UserResponse {
     private final long id;

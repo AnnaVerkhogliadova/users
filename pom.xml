@@ -28,7 +28,7 @@
     </build>
     <parent>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId> <!-- Данная зависимость является базовой для всех проектов Spring Boot. Именно с нее начинается Spring Boot проект -->
+        <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.7.RELEASE</version>
     </parent>
 
@@ -77,10 +77,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId> <!-- Данной зависимостью мы говорим о том, что этот проект является веб - проектом-->
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
     </dependencies>
 

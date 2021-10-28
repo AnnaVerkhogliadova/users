@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository //создаст бин классса и внедрит его в контроллер
+@Repository
 public class JdbcUserRepository implements UserRepository {
     private static final String URL = "jdbc:postgresql://localhost:5432/users";
     private static final String USERNAME = "postgres";

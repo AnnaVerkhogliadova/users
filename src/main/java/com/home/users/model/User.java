@@ -7,8 +7,6 @@ public class User {
     private final long id;
     private final String firstname;
 
-
-
     public User(long id, String firstname) {
         this.id = id;
         this.firstname = firstname;
